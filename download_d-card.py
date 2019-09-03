@@ -1,6 +1,4 @@
 import time
-import os
-import requests
 from selenium import webdriver
 import chromedriver_binary
 from d_credentials import *
