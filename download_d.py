@@ -28,3 +28,25 @@ time.sleep(3)
 u = driver.find_element_by_name('authid')
 u.send_keys(user_id)
 u.submit()
+
+# ログイン画面のパスワードにキーを送信
+u = driver.find_element_by_name('authpass')
+u.send_keys(password)
+u.submit()
+
+# データのダウンロードリンク先を取得
+tag = driver.find_element_by_link_text('CSVをダウンロードする')
+href = tag.get_attribute('href')
+
+# Chromeからクッキーデータを得る
+c = {}
+for cookie in driver.get_cookies():
+    c[cookie['name']] = cookie['value']
+# requestsを利用してデータのダウンロード
+r = requests.get(href, cookies=c)
+with open("d_card_data.csv", 'wb') as f:
+    f.write(r.content)
+
+# 結果を30秒表示して終了する
+time.sleep(30)
+driver.quit()
