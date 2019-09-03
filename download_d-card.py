@@ -29,6 +29,6 @@ u.submit()
 # 今月の利用明細CSVをダウンロードする
 driver.execute_script("doSubmitForm(document.download_form)")
 
-# 30秒待ってから終了する
-time.sleep(30)
+# 60秒待ってから終了する
+time.sleep(60)
 driver.quit()
