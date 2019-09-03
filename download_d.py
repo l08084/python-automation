@@ -35,17 +35,11 @@ u.send_keys(password)
 u.submit()
 
 # データのダウンロードリンク先を取得
-tag = driver.find_element_by_link_text('CSVをダウンロードする')
-href = tag.get_attribute('href')
-
-# Chromeからクッキーデータを得る
-c = {}
-for cookie in driver.get_cookies():
-    c[cookie['name']] = cookie['value']
-# requestsを利用してデータのダウンロード
-r = requests.get(href, cookies=c)
-with open("d_card_data.csv", 'wb') as f:
-    f.write(r.content)
+time.sleep(5)
+# tag = driver.find_element_by_link_text('CSVをダウンロードする')
+driver.execute_script("doSubmitForm(document.download_form)")
+# driver.execute_script(
+#     "document.querySelector('.csv-print_bottom p a').click();")
 
 # 結果を30秒表示して終了する
 time.sleep(30)
